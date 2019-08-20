@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 创建方式1：空参构造创建 -->
+    <bean id="a" class="com.bfbmedu.seven.vip.ioc_di.A"/>
+    <!--
+        创建方式2：静态工厂创建
+        调用A的createBObj方法来创建名为b的对象放入容器
+    -->
+    <bean id="b" class="com.bfbmedu.seven.vip.ioc_di.A" factory-method="createBObj"/>
+    <!--
+            创建方式3：实例工厂创建
+            调用实例a的createCObj方法来创建名为c的对象放入容器
+     -->
+    <bean id="c" factory-bean="a" factory-method="createCObj"/>
+
+
+
+    <!--DI 方式1 通过有参构造器的方式 -->
+    <bean id="d" class="com.bfbmedu.seven.vip.ioc_di.D">
+        <constructor-arg ref="a"/>
+        <constructor-arg ref="b"/>
+    </bean>
+
+    <!--DI 方式2 通过setter函数的方式 -->
+    <bean id="e" class="com.bfbmedu.seven.vip.ioc_di.E">
+        <property name="a" ref="a"/>
+        <property name="b" ref="b"/>
+    </bean>
+
+
+</beans>
